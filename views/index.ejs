@@ -1,0 +1,34 @@
+<%- include('partials/header.ejs')  %>
+
+<h2 id="yourReads">Your Reads</h2> 
+<div class="yourReads">
+    
+    <% yr.forEach((data) => { %>
+    <div class="yrdata">
+        <img src="https://covers.openlibrary.org/b/lccn/<%= data.lccn %>-M.jpg" alt="Book Cover">
+        <p><%= data.title  %></p>
+</div><% }) %> 
+</div>
+
+
+<h2>Wishlist</h2> 
+<div class="yourReads">
+    
+    <% wl.forEach((data) => { %>
+    <div class="yrdata">
+        <img src="https://covers.openlibrary.org/b/lccn/<%= data.lccn %>-M.jpg" alt="Book Cover">
+        <p><%= data.title  %></p>
+</div><% }) %> 
+</div>
+
+<div class="footer">
+    <img src="resources/logobg.png" alt="">
+    <h2>Quick Links</h2>
+    <div class="quicklink">
+        <a href="/">Home</a>
+        <a href="#yourReads">YourReads</a>
+        <a href="/search">Search For Books</a>
+    </div>
+</div>
+</body>
+</html>

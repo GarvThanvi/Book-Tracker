@@ -1,0 +1,56 @@
+<%- include('partials/navbar.ejs')  %>
+
+
+<form action="/findbook" method="POST">
+<div class="searchbar">
+    <input type="text" name="bookname" placeholder="Search a book by it's title" autocomplete="off">
+    <button><img src="resources/searchicon.png" alt="" class="searchbutton"></button>
+</div>
+</form>
+
+<%if(locals.allbooks) {%>
+<div class="showsresult">
+    <% allbooks.forEach((book) => { %>
+        <% if (book.lccn) { %>
+            <% const imageUrl = `https://covers.openlibrary.org/b/lccn/${book.lccn ? Object.values(book.lccn)[0] : ''}-M.jpg` %>
+            <% if(imageUrl) { %>
+                <% let count = 0; %>
+        <div class="eachbook <%=count%>">
+            <img src="https://covers.openlibrary.org/b/lccn/<%-book.isbn ? Object.values(book.lccn)[0] : ''%>-M.jpg" alt="Book Cover">
+            <p><%= book.title %></p>
+            <form action="/addtoyr" method="post">
+                <button  name="content" value="<%=book.title%>+<%= Object.values(book.lccn)[0]%>"  class="buttonyr">➕Add to YourReads</button>
+            </form> 
+            <form action="/addtowl" method="post">
+                <button   name="content" value="<%=book.title%>+<%= Object.values(book.lccn)[0]%>"  class="buttonwl"> ➕Add to Wishlist</button>
+            </form>
+        </div>
+        <hr>
+        <% } %>
+        <% } %>
+        <% }) %>
+</div>
+<% }else {%>
+
+    <div class="loading">
+        <img src="resources/searchicongif.gif" alt="Search icon gif here">
+        <p>Search for books by keyword or their title</p>
+    </div>
+    <% } %>
+
+    <script>
+        
+        document.querySelector(".buttonyr").addEventListener("click", function() {
+                document.querySelector(".buttonyr").textContent = "✅Added to YourReads"
+            })
+        
+        
+            document.querySelector(".buttonwl").addEventListener("click", function() {
+                document.querySelector(".buttonwl").textContent = "✅Added to Wishlist"
+            })
+        
+        
+    </script>
+
+</body>
+</html>
